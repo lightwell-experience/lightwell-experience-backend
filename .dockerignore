@@ -1,0 +1,8 @@
+release/**
+vendor
+.vscode/**
+.*
+*.log
+.docker
+.podman
+.kube

@@ -1,0 +1,37 @@
+version: "2"
+linters:
+  enable:
+    - bodyclose
+    - forcetypeassert
+    - gosec
+    - misspell
+    - whitespace
+    - exptostd
+  settings:
+    gosec:
+      excludes:
+        - G404
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    rules:
+      - path: (.+)\.go$
+        text: composite
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+formatters:
+  enable:
+    - gci
+    - gofmt
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
