@@ -1,4 +1,4 @@
-# Backend for the Lightwell Network UI
+# Backend for the Lightwell Experience UI
 
 ## Local development
 
