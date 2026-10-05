@@ -24,7 +24,7 @@ func serveRouter(req *http.Request) (int, []byte, error) {
 }
 
 func TestPing(t *testing.T) {
-	paths := []string{"/ping", "/ping/"}
+	paths := []string{"/ping", "/ping/", "/api/lightwell-next/v1.0/status"}
 	for _, path := range paths {
 		req, _ := http.NewRequest("GET", path, nil)
 		code, body, err := serveRouter(req)

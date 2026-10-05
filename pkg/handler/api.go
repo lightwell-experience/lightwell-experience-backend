@@ -9,6 +9,7 @@ import (
 func RegisterPing(engine *echo.Echo) {
 	engine.GET("/ping", ping)
 	engine.GET("/ping/", ping)
+	engine.GET("/api/lightwell-next/v1.0/status", ping)
 }
 
 func ping(c echo.Context) error {
