@@ -16,7 +16,7 @@ objects:
           webServices:
             public:
               enabled: true
-              apiPath: staging-lightwell
+              apiPath: lightwell-next
           podSpec:
             securityContext:
               runAsNonRoot: true
