@@ -1,4 +1,4 @@
-module github.com/lightwell-network/lightwell-network-backend
+module github.com/lightwell-experience/lightwell-experience-backend
 
 go 1.26.0
 

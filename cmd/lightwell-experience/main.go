@@ -8,8 +8,8 @@ import (
 	"sync"
 	"syscall"
 
-	"github.com/lightwell-network/lightwell-network-backend/pkg/config"
-	"github.com/lightwell-network/lightwell-network-backend/pkg/router"
+	"github.com/lightwell-experience/lightwell-experience-backend/pkg/config"
+	"github.com/lightwell-experience/lightwell-experience-backend/pkg/router"
 	"github.com/rs/zerolog/log"
 )
 
