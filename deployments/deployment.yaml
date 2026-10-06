@@ -3,12 +3,12 @@
 apiVersion: template.openshift.io/v1
 kind: Template
 metadata:
-  name: lightwell-network-backend
+  name: lightwell-experience-backend
 objects:
   - apiVersion: cloud.redhat.com/v1alpha1
     kind: ClowdApp
     metadata:
-      name: lightwell-network-backend
+      name: lightwell-experience-backend
     spec:
       envName: ${ENV_NAME}
       deployments:

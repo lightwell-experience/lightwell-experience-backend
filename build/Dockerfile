@@ -19,4 +19,4 @@ COPY --from=builder /go/src/app/release/* ./
 
 USER 1001
 
-CMD ["/lightwell-network"]
+CMD ["/lightwell-experience"]

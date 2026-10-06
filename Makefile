@@ -1,5 +1,5 @@
 GO_OUTPUT ?= release
-BINARY := $(GO_OUTPUT)/lightwell-network
+BINARY := $(GO_OUTPUT)/lightwell-experience
 GOLANGCI_LINT := $(GO_OUTPUT)/golangci-lint
 GOLANGCI_LINT_VERSION :=
 
@@ -10,7 +10,7 @@ build: $(BINARY)
 
 $(BINARY): $(GO_SOURCES) go.mod go.sum
 	mkdir -p $(GO_OUTPUT)
-	go build -o "$@" ./cmd/lightwell-network
+	go build -o "$@" ./cmd/lightwell-experience
 
 .PHONY: run
 run: $(BINARY)
