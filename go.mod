@@ -3,7 +3,7 @@ module github.com/lightwell-experience/lightwell-experience-backend
 go 1.26.0
 
 require (
-	github.com/labstack/echo/v4 v4.15.4
+	github.com/labstack/echo/v4 v4.16.0
 	github.com/rs/zerolog v1.35.1
 	github.com/spf13/viper v1.21.0
 	github.com/stretchr/testify v1.12.1
