@@ -2,3 +2,10 @@ logging:
   level: debug
   console: true
   color: true
+
+api:
+  path: lightwell-next
+
+metrics:
+  path: /metrics
+  port: 9000

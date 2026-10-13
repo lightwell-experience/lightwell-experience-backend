@@ -37,3 +37,11 @@ make run
 ```sh
 curl http://localhost:8000/ping
 ```
+
+### Metrics
+
+Prometheus metrics are exposed on a separate scrape endpoint: `:9000/metrics`.
+
+```sh
+curl http://localhost:9000/metrics
+```
