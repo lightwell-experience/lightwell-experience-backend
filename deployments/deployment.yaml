@@ -13,6 +13,7 @@ objects:
       envName: ${ENV_NAME}
       deployments:
         - name: service
+          replicas: ${{API_REPLICAS}}
           webServices:
             public:
               enabled: true
@@ -42,6 +43,13 @@ objects:
               periodSeconds: 5
               successThreshold: 1
               timeoutSeconds: 120
+            resources:
+              limits:
+                cpu: ${CPU_LIMIT_API}
+                memory: ${MEMORY_LIMIT_API}
+              requests:
+                cpu: ${CPU_REQUEST_API}
+                memory: ${MEMORY_REQUEST_API}
 
   - apiVersion: v1
     kind: Service
@@ -71,3 +79,13 @@ parameters:
     required: true
   - name: IMAGE_TAG
     required: true
+  - name: API_REPLICAS
+    value: "3"
+  - name: CPU_LIMIT_API
+    value: 500m
+  - name: CPU_REQUEST_API
+    value: 100m
+  - name: MEMORY_LIMIT_API
+    value: 500Mi
+  - name: MEMORY_REQUEST_API
+    value: 100Mi
