@@ -1,0 +1,26 @@
+version: 2
+updates:
+  - package-ecosystem: 'gomod'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    cooldown:
+      default-days: 5
+    commit-message:
+      prefix: 'Build: '
+    groups:
+      go:
+        patterns:
+          - '*'
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    cooldown:
+      default-days: 5
+    commit-message:
+      prefix: 'Build: '
+    groups:
+      npm:
+        patterns:
+          - '*'
