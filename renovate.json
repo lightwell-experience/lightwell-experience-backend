@@ -5,5 +5,18 @@
   ],
   "schedule": [
     "on Monday after 3am and before 10am"
-  ]
+  ],
+  "gomod": {
+    "enabled": false
+  },
+  "packageRules": [
+    {
+      "description": "Disable all npm dependency updates (owned by dependabot)",
+      "matchManagers": ["npm"],
+      "enabled": false
+    }
+  ],
+  "lockFileMaintenance": {
+    "enabled": false
+  }
 }
