@@ -27,9 +27,286 @@ data:
             "x": 0,
             "y": 0
           },
+          "id": 100,
+          "panels": [],
+          "title": "SLOs (28-day rolling)",
+          "type": "row"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "description": "28-day availability SLI: non-5xx / all requests. Target 95%.",
+          "fieldConfig": {
+            "defaults": {
+              "decimals": 2,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "yellow",
+                    "value": 0.9
+                  },
+                  {
+                    "color": "green",
+                    "value": 0.95
+                  }
+                ]
+              },
+              "unit": "percentunit"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 6,
+            "x": 0,
+            "y": 1
+          },
+          "id": 101,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "editorMode": "code",
+              "expr": "(\n  sum(rate(lightwell_experience_http_status_histogram_count{namespace=\"$namespace\",status!=\"5xx\"}[28d]))\n  or vector(0)\n)\n/\nsum(rate(lightwell_experience_http_status_histogram_count{namespace=\"$namespace\"}[28d]))",
+              "legendFormat": "__auto",
+              "refId": "A"
+            }
+          ],
+          "title": "Availability SLI (target 95%)",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "description": "Remaining availability error budget over 28 days (100% = full, 0% = exhausted). Target SLO 95%.",
+          "fieldConfig": {
+            "defaults": {
+              "decimals": 1,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "yellow",
+                    "value": 0.25
+                  },
+                  {
+                    "color": "green",
+                    "value": 0.5
+                  }
+                ]
+              },
+              "unit": "percentunit"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 6,
+            "x": 6,
+            "y": 1
+          },
+          "id": 103,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "editorMode": "code",
+              "expr": "(\n  (\n    (\n      sum(rate(lightwell_experience_http_status_histogram_count{namespace=\"$namespace\",status!=\"5xx\"}[28d]))\n      or vector(0)\n    )\n    /\n    sum(rate(lightwell_experience_http_status_histogram_count{namespace=\"$namespace\"}[28d]))\n  ) - 0.95\n) / (1 - 0.95)",
+              "legendFormat": "__auto",
+              "refId": "A"
+            }
+          ],
+          "title": "Availability error budget remaining",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "description": "28-day latency SLI: fraction of requests with duration \u2264 500ms. Target 90%.",
+          "fieldConfig": {
+            "defaults": {
+              "decimals": 2,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "yellow",
+                    "value": 0.85
+                  },
+                  {
+                    "color": "green",
+                    "value": 0.9
+                  }
+                ]
+              },
+              "unit": "percentunit"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 6,
+            "x": 12,
+            "y": 1
+          },
+          "id": 102,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "editorMode": "code",
+              "expr": "sum(rate(lightwell_experience_http_status_histogram_bucket{namespace=\"$namespace\",le=\"0.5\"}[28d]))\n/\nsum(rate(lightwell_experience_http_status_histogram_count{namespace=\"$namespace\"}[28d]))",
+              "legendFormat": "__auto",
+              "refId": "A"
+            }
+          ],
+          "title": "Latency SLI (target 90% \u2264 500ms)",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "description": "Remaining latency error budget over 28 days (100% = full, 0% = exhausted). Target SLO 90% \u2264 500ms.",
+          "fieldConfig": {
+            "defaults": {
+              "decimals": 1,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "yellow",
+                    "value": 0.25
+                  },
+                  {
+                    "color": "green",
+                    "value": 0.5
+                  }
+                ]
+              },
+              "unit": "percentunit"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 6,
+            "x": 18,
+            "y": 1
+          },
+          "id": 104,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "editorMode": "code",
+              "expr": "(\n  (\n    sum(rate(lightwell_experience_http_status_histogram_bucket{namespace=\"$namespace\",le=\"0.5\"}[28d]))\n    /\n    sum(rate(lightwell_experience_http_status_histogram_count{namespace=\"$namespace\"}[28d]))\n  ) - 0.90\n) / (1 - 0.90)",
+              "legendFormat": "__auto",
+              "refId": "A"
+            }
+          ],
+          "title": "Latency error budget remaining",
+          "type": "stat"
+        },
+        {
+          "collapsed": false,
+          "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 6
+          },
           "id": 1,
           "panels": [],
-          "title": "HTTP traffic (Lightwell)",
+          "title": "HTTP traffic",
           "type": "row"
         },
         {
@@ -53,7 +330,7 @@ data:
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 1
+            "y": 7
           },
           "id": 2,
           "options": {
@@ -80,7 +357,7 @@ data:
               "refId": "A"
             }
           ],
-          "title": "Lightwell request rate",
+          "title": "Request rate",
           "type": "timeseries"
         },
         {
@@ -104,7 +381,7 @@ data:
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 1
+            "y": 7
           },
           "id": 3,
           "options": {
@@ -131,7 +408,7 @@ data:
               "refId": "A"
             }
           ],
-          "title": "Lightwell requests by status",
+          "title": "Requests by status",
           "type": "timeseries"
         },
         {
@@ -155,7 +432,7 @@ data:
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 9
+            "y": 15
           },
           "id": 4,
           "options": {
@@ -182,7 +459,7 @@ data:
               "refId": "A"
             }
           ],
-          "title": "Lightwell requests by path",
+          "title": "Requests by path",
           "type": "timeseries"
         },
         {
@@ -191,7 +468,7 @@ data:
             "h": 1,
             "w": 24,
             "x": 0,
-            "y": 17
+            "y": 23
           },
           "id": 5,
           "panels": [],
@@ -219,7 +496,7 @@ data:
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 18
+            "y": 24
           },
           "id": 6,
           "options": {
@@ -270,7 +547,7 @@ data:
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 18
+            "y": 24
           },
           "id": 7,
           "options": {
@@ -321,7 +598,7 @@ data:
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 26
+            "y": 32
           },
           "id": 8,
           "options": {
@@ -372,7 +649,7 @@ data:
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 26
+            "y": 32
           },
           "id": 9,
           "options": {
@@ -408,11 +685,11 @@ data:
             "h": 1,
             "w": 24,
             "x": 0,
-            "y": 34
+            "y": 40
           },
           "id": 10,
           "panels": [],
-          "title": "Lightwell CronJobs",
+          "title": "CronJobs",
           "type": "row"
         },
         {
@@ -436,7 +713,7 @@ data:
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 35
+            "y": 41
           },
           "id": 11,
           "options": {
@@ -487,7 +764,7 @@ data:
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 35
+            "y": 41
           },
           "id": 12,
           "options": {
